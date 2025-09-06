@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="userDashboardTitle">แดชบอร์ดผู้ใช้ - ระบบแจ้งเตือนระดับน้ำเกลือ</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Role-based access control must run early -->
+  <script src="auth.js"></script>
+  <!-- Load language and theme management -->
+  <script src="lang.js"></script>
+</head>
+<body>
+  <!-- Navigation bar for user dashboard with limited links -->
+  <nav class="navbar">
+    <div class="nav-links">
+      <a href="index.html" class="nav-link" data-i18n="navHome">หน้าแรก</a>
+      <a href="user.html" class="nav-link active" data-i18n="myDevice">อุปกรณ์ของฉัน</a>
+      <a href="contact.html" class="nav-link" data-i18n="navContact">ติดต่อ</a>
+    </div>
+    <div class="nav-actions">
+      <select id="languageSelect" class="lang-select">
+        <option value="th" data-i18n="navLangTh">ไทย</option>
+        <option value="en" data-i18n="navLangEn">English</option>
+        <option value="la" data-i18n="navLangLa">ລາວ</option>
+      </select>
+      <button id="darkModeToggle" class="dark-toggle" data-i18n="darkMode">โหมดมืด</button>
+      <button id="logoutButton" class="logout-button" data-i18n="logout">ออกจากระบบ</button>
+    </div>
+  </nav>
+  <main>
+    <h1 data-i18n="userDashboardTitle">แดชบอร์ดผู้ใช้</h1>
+    <p class="intro" data-i18n="userDashboardDescription">ตรวจสอบถุงน้ำเกลือและกล้องวงจรปิดของคุณที่บ้าน</p>
+    <div id="userDeviceContainer" class="beds-grid"></div>
+  </main>
+  <!-- Alert area for general notifications -->
+  <div id="alertArea" class="alert hidden"></div>
+  <!-- Modal overlay and alert for pop-up notifications -->
+  <div id="modalOverlay" class="modal-overlay hidden"></div>
+  <div id="modalAlert" class="modal hidden">
+    <div id="modalMessage"></div>
+    <button id="modalClose" class="modal-close-button" data-i18n="close">ปิด</button>
+  </div>
+  <!-- Patient detail modal overlay -->
+  <div id="patientModalOverlay" class="modal-overlay hidden"></div>
+  <div id="patientModal" class="patient-modal hidden">
+    <div class="patient-modal-content">
+      <div class="patient-video-wrapper">
+        <video id="patientVideo" autoplay playsinline muted></video>
+        <canvas id="poseCanvas" class="pose-canvas"></canvas>
+      </div>
+      <div class="patient-details-wrapper">
+        <h3 data-i18n="patientDetails">รายละเอียดผู้ป่วย</h3>
+        <div id="detectionAlert" class="detection-alert hidden"></div>
+        <div id="patientInfo" class="patient-info"></div>
+        <button id="patientClose" class="modal-close-button" data-i18n="close">ปิด</button>
+      </div>
+    </div>
+  </div>
+  <!-- Include MediaPipe libraries for pose estimation -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.4/pose.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.4/drawing_utils.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.4/camera_utils.js"></script>
+  <!-- User specific script for device management and detection -->
+  <script src="user.js"></script>
+</body>
+</html>

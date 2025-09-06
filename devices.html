@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>จัดการอุปกรณ์ - ระบบแจ้งเตือนระดับน้ำเกลือ</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Role-based access control must be loaded before page rendering -->
+  <script src="auth.js"></script>
+</head>
+<body>
+  <!-- Navigation bar with language/theme controls -->
+  <nav class="navbar">
+    <div class="nav-links">
+      <a href="index.html" class="nav-link" data-i18n="navHome">หน้าแรก</a>
+      <a href="dashboard.html" class="nav-link" data-i18n="navDashboard">แดชบอร์ด</a>
+      <a href="devices.html" class="nav-link active" data-i18n="navDevices">อุปกรณ์</a>
+      <a href="reports.html" class="nav-link" data-i18n="navReports">รายงาน</a>
+      <a href="staff.html" class="nav-link" data-i18n="navStaff">เจ้าหน้าที่</a>
+      <a href="patients.html" class="nav-link" data-i18n="navPatients">ผู้ป่วย</a>
+      <a href="contact.html" class="nav-link" data-i18n="navContact">ติดต่อเรา</a>
+    </div>
+    <div class="nav-actions">
+      <select id="languageSelect" class="lang-select">
+        <option value="th" data-i18n="navLangTh">ไทย</option>
+        <option value="en" data-i18n="navLangEn">English</option>
+        <option value="la" data-i18n="navLangLa">ລາວ</option>
+      </select>
+      <button id="darkModeToggle" class="dark-toggle" data-i18n="darkMode">โหมดมืด</button>
+    </div>
+  </nav>
+  <main>
+    <h1 style="margin-bottom:16px;" data-i18n="manageDevices">จัดการอุปกรณ์</h1>
+    <!-- Guidance section with icon and instructions -->
+    <div class="device-guidance">
+      <img src="iv_bag_icon.png" alt="ไอคอนถุงน้ำเกลือ" class="guidance-icon">
+      <p data-i18n="guidanceText">
+        คำแนะนำ: โปรดติดตั้งเซนเซอร์ตรวจจับระดับน้ำเกลือให้ถูกต้อง โดยวางเซนเซอร์ที่ด้านล่างของถุงน้ำเกลือ
+        และตรวจสอบการเชื่อมต่อก่อนใช้งาน ท่านสามารถใช้ปุ่ม "ทดสอบอุปกรณ์" เพื่อทดสอบการเชื่อมต่อของแต่ละอุปกรณ์
+      </p>
+    </div>
+    <div id="devicesContainer" class="devices-grid"></div>
+  </main>
+  <!-- Include language/theme management before page script -->
+  <script src="lang.js"></script>
+  <script src="devices.js"></script>
+</body>
+</html>

@@ -1,0 +1,936 @@
+/* Base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f7fa;
+  color: #333;
+  line-height: 1.4;
+  padding: 20px;
+}
+
+header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+select {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+label {
+  margin-right: 4px;
+}
+
+.test-button {
+  background-color: #007acc;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Summary button */
+.summary-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+.summary-button:hover {
+  background-color: #218838;
+}
+
+.test-button:hover {
+  background-color: #005fa3;
+}
+
+/* Building representation for selecting floors */
+/* Building representation for selecting floors */
+/*
+ * The building container stacks each floor segment to mimic a building.
+ * Each floor button occupies equal height and has a dividing line to clearly
+ * separate floors. The selected floor is highlighted with a darker colour.
+ */
+.building {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  width: 80px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-right: 16px;
+  background-color: #fefefe;
+}
+
+.floor-button {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e9ecef;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+  font-size: 12px;
+  user-select: none;
+  transition: background-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+/* Remove border on the last floor segment */
+.floor-button:last-child {
+  border-bottom: none;
+}
+
+/* Highlight selected floor */
+.floor-button.selected {
+  background-color: #007acc;
+  color: #fff;
+  transform: translateX(2px);
+}
+
+/* Hover effect for floors */
+.floor-button:hover {
+  background-color: #005fa3;
+  color: #fff;
+}
+
+/* Test controls styling */
+.test-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.test-controls label {
+  font-size: 14px;
+  margin-right: 4px;
+}
+.test-controls select {
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Alert styles */
+.alert {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #f8d7da;
+  color: #842029;
+  border: 1px solid #f5c2c7;
+  border-radius: 4px;
+  padding: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 100;
+}
+
+.alert.hidden {
+  display: none;
+}
+
+/* Detection alert styles inside patient modal */
+.detection-alert {
+  background-color: #f8d7da;
+  color: #842029;
+  border: 1px solid #f5c2c7;
+  border-radius: 4px;
+  padding: 8px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+.detection-alert.hidden {
+  display: none;
+}
+body.dark-mode .detection-alert {
+  background-color: #512727;
+  border-color: #7a414b;
+  color: #f5c2c7;
+}
+
+/* Grid layout for bed cards */
+.beds-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+/* Summary area styles */
+.summary {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 20px;
+  max-width: 100%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+
+.summary.hidden {
+  display: none;
+}
+
+/* Change bag button inside card */
+.change-button {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 6px 12px;
+  font-size: 12px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Login page container */
+.login-container {
+  max-width: 800px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+/* Role selection container */
+.role-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 30px;
+}
+
+.role-option {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  width: 260px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.role-option:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.role-option h3 {
+  margin-bottom: 8px;
+  font-size: 20px;
+  color: #007acc;
+}
+
+.role-option p {
+  font-size: 14px;
+  color: #555;
+}
+
+.role-button {
+  margin-top: 12px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007acc;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.role-button:hover {
+  background-color: #005fa3;
+}
+
+/* Dark mode adjustments for login page */
+body.dark-mode .role-option {
+  background-color: #242529;
+  border-color: #444;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+body.dark-mode .role-option p {
+  color: #ccc;
+}
+
+body.dark-mode .role-option h3 {
+  color: #9ecbff;
+}
+
+body.dark-mode .role-button {
+  background-color: #3399ff;
+}
+
+.logout-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+.logout-button:hover {
+  background-color: #b02a37;
+}
+
+.change-button:hover {
+  background-color: #5a6268;
+}
+
+/* High flow indicator */
+.high-flow {
+  font-weight: bold;
+  color: #d9534f;
+}
+
+/* Bed card styles */
+.bed-card {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.bed-card h3 {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.bed-card .patient {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.bed-card .fluid-type {
+  font-size: 12px;
+  margin-bottom: 12px;
+  color: #666;
+}
+
+/* Progress bar */
+.progress {
+  background-color: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+  height: 12px;
+  margin-bottom: 8px;
+}
+
+.progress-bar {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.progress-green {
+  background-color: #3cb371;
+}
+
+.progress-yellow {
+  background-color: #f0ad4e;
+}
+
+.progress-red {
+  background-color: #d9534f;
+}
+
+/* Flow rate display */
+.flow-rate {
+  font-size: 13px;
+  color: #555;
+}
+
+/* Bed icon style for each bed card */
+.bed-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+/* Navigation bar */
+.navbar {
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Group navigation links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+/* Container for language and theme controls */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+.navbar a {
+  color: #007acc;
+  text-decoration: none;
+  font-weight: 600;
+}
+.navbar a.active {
+  color: #005fa3;
+  text-decoration: underline;
+}
+.navbar a:hover {
+  text-decoration: underline;
+}
+/* Styling for language select and dark mode toggle */
+.lang-select {
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #fff;
+  color: #333;
+}
+.dark-toggle {
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.dark-toggle:hover {
+  background-color: #5a6268;
+}
+
+/* Home page styles */
+.home-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 40px;
+}
+
+.home-container h1 {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.home-container .intro {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 24px;
+}
+
+.home-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.home-link {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #007acc;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+.home-link:hover {
+  background-color: #005fa3;
+}
+
+/* Devices page styles */
+.devices-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.device-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.device-card h3 {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.device-info {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.device-status {
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.status-online {
+  color: #28a745;
+}
+
+.status-offline {
+  color: #d9534f;
+}
+
+/* Battery progress bar */
+.battery-progress {
+  background-color: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+  height: 10px;
+  margin-bottom: 4px;
+}
+
+.battery-bar {
+  height: 100%;
+}
+
+.battery-green {
+  background-color: #3cb371;
+}
+
+.battery-yellow {
+  background-color: #f0ad4e;
+}
+
+.battery-red {
+  background-color: #d9534f;
+}
+
+.battery-text {
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.device-test-button {
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 12px;
+  background-color: #007acc;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.device-test-button:hover {
+  background-color: #005fa3;
+}
+
+/* Modal overlay for pop-up notifications */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 150;
+}
+
+/* Hide overlay when it has the hidden class */
+.modal-overlay.hidden {
+  display: none;
+}
+
+/* Modal container for pop-up notifications */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 200;
+  max-width: 320px;
+  text-align: center;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-close-button {
+  margin-top: 16px;
+  padding: 6px 12px;
+  font-size: 14px;
+  background-color: #007acc;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal-close-button:hover {
+  background-color: #005fa3;
+}
+
+/* Staff management page styles */
+.staff-form {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  max-width: 600px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Dark mode styles */
+body.dark-mode {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+body.dark-mode .navbar {
+  background-color: #1f1f1f;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.05);
+}
+body.dark-mode .navbar a {
+  color: #90caf9;
+}
+body.dark-mode .navbar a.active {
+  color: #bb86fc;
+  text-decoration: underline;
+}
+body.dark-mode .nav-actions select,
+body.dark-mode .lang-select {
+  background-color: #2a2a2a;
+  color: #f5f5f5;
+  border-color: #444;
+}
+body.dark-mode .dark-toggle {
+  background-color: #5a6268;
+}
+body.dark-mode .dark-toggle:hover {
+  background-color: #444b4f;
+}
+body.dark-mode .bed-card,
+body.dark-mode .device-card,
+body.dark-mode .staff-form,
+body.dark-mode .device-guidance,
+body.dark-mode .staff-table,
+body.dark-mode .modal,
+body.dark-mode .summary {
+  background-color: #1e1e1e;
+  border-color: #333;
+  color: #f5f5f5;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.05);
+}
+body.dark-mode .progress,
+body.dark-mode .battery-progress {
+  background-color: #333;
+}
+body.dark-mode .alert {
+  background-color: #512727;
+  color: #f5c2c7;
+  border-color: #7a414b;
+}
+body.dark-mode .modal {
+  background-color: #242424;
+  border-color: #444;
+}
+
+/*
+ * In dark mode, update the building and floor buttons so that the text
+ * contrasts better against the dark background.  Without these rules
+ * the default light-coloured text and backgrounds for the building
+ * selector can blend into the dark page, making floors hard to see.
+ */
+body.dark-mode .building {
+  /* In dark mode, give the building selector a slightly lighter dark background */
+  background-color: #252525;
+  border-color: #444;
+}
+body.dark-mode .floor-button {
+  /* Use a mid-dark background for unselected floors and light grey text */
+  background-color: #2e2e2e;
+  color: #ccc;
+  border-bottom: 1px solid #555;
+}
+body.dark-mode .floor-button.selected {
+  /* Highlight the selected floor with a blue accent that stands out on dark backgrounds */
+  background-color: #007acc;
+  color: #fff;
+}
+body.dark-mode .floor-button:hover {
+  background-color: #3a3a3a;
+  color: #fff;
+}
+
+/* Guidance section on devices page */
+.device-guidance {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+.device-guidance .guidance-icon {
+  width: 60px;
+  height: auto;
+  /* Simple floating animation to draw attention to the guidance icon */
+  animation: float 3s ease-in-out infinite;
+}
+.@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+  100% { transform: translateY(0); }
+}
+.device-guidance p {
+  flex: 1;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.4;
+}
+.staff-form .form-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.staff-form label {
+  flex: 0 0 120px;
+  font-size: 14px;
+  margin-right: 8px;
+}
+.staff-form input[type="text"],
+.staff-form select {
+  flex: 1 1 auto;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+.primary-button {
+  display: inline-block;
+  background-color: #007acc;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 8px;
+}
+.primary-button:hover {
+  background-color: #005fa3;
+}
+.staff-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.staff-table th,
+.staff-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  text-align: left;
+}
+.staff-table th {
+  background-color: #f7f7f7;
+  font-weight: 600;
+}
+.delete-button {
+  background-color: #d9534f;
+  color: #fff;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.delete-button:hover {
+  background-color: #c9302c;
+}
+
+/* Patient form styles */
+.patient-form {
+  max-width: 600px;
+  margin-top: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.patient-form .form-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.patient-form label {
+  flex: 0 0 160px;
+  font-size: 14px;
+  margin-right: 8px;
+}
+.patient-form input,
+.patient-form select,
+.patient-form textarea {
+  flex: 1 1 auto;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+.patient-form textarea {
+  resize: vertical;
+}
+.form-message {
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+/* Patient modal styles */
+.patient-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 960px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  z-index: 1001;
+  overflow: hidden;
+}
+
+/* Hide the patient modal when the hidden class is applied. Without
+ * this rule the modal remains visible even after adding the `hidden`
+ * class in JavaScript. The `.modal` pop‑ups already define this
+ * behaviour, so mirror it here for the patient modal.
+ */
+.patient-modal.hidden {
+  display: none;
+}
+.patient-modal-content {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.patient-video-wrapper {
+  flex: 1 1 50%;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 360px;
+  /* Position relative so that absolutely positioned overlays (e.g., pose canvas) align correctly */
+  position: relative;
+}
+.patient-video-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Canvas overlay to draw pose skeleton on top of the webcam video. */
+.pose-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Let user interactions pass through to the video */
+  z-index: 2;
+}
+.patient-details-wrapper {
+  flex: 1 1 50%;
+  padding: 16px;
+  max-height: 360px;
+  overflow-y: auto;
+}
+.patient-details-wrapper h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+.patient-info div {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+@media (max-width: 768px) {
+  .patient-modal-content {
+    flex-direction: column;
+  }
+  .patient-video-wrapper, .patient-details-wrapper {
+    flex: 1 1 100%;
+    max-height: none;
+    height: 240px;
+  }
+}
+
+/* Dark mode styles for patient form and modal */
+body.dark-mode .patient-form {
+  background-color: #1e1e1e;
+  border-color: #333;
+  color: #f5f5f5;
+}
+body.dark-mode .patient-form input,
+body.dark-mode .patient-form select,
+body.dark-mode .patient-form textarea {
+  background-color: #2a2a2a;
+  border-color: #444;
+  color: #f5f5f5;
+}
+body.dark-mode .patient-modal {
+  background-color: #242424;
+  border-color: #444;
+  box-shadow: 0 4px 8px rgba(255,255,255,0.2);
+}
+body.dark-mode .patient-details-wrapper {
+  color: #f5f5f5;
+}

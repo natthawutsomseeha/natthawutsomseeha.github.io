@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="homeTitle">ยินดีต้อนรับสู่ระบบแจ้งเตือนระดับน้ำเกลือ</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation bar for doctor home page -->
+  <nav class="navbar">
+    <div class="nav-links">
+      <a href="index.html" class="nav-link active" data-i18n="navHome">หน้าแรก</a>
+      <a href="dashboard.html" class="nav-link" data-i18n="navDashboard">แดชบอร์ด</a>
+      <a href="devices.html" class="nav-link" data-i18n="navDevices">อุปกรณ์</a>
+      <a href="reports.html" class="nav-link" data-i18n="navReports">รายงาน</a>
+      <a href="staff.html" class="nav-link" data-i18n="navStaff">เจ้าหน้าที่</a>
+      <a href="patients.html" class="nav-link" data-i18n="navPatients">ผู้ป่วย</a>
+      <a href="contact.html" class="nav-link" data-i18n="navContact">ติดต่อเรา</a>
+    </div>
+    <div class="nav-actions">
+      <select id="languageSelect" class="lang-select">
+        <option value="th" data-i18n="navLangTh">ไทย</option>
+        <option value="en" data-i18n="navLangEn">English</option>
+        <option value="la" data-i18n="navLangLa">ລາວ</option>
+      </select>
+      <button id="darkModeToggle" class="dark-toggle" data-i18n="darkMode">โหมดมืด</button>
+      <button id="logoutButton" class="logout-button" data-i18n="logout">ออกจากระบบ</button>
+    </div>
+  </nav>
+  <main class="home-container">
+    <h1 data-i18n="homeTitle">ยินดีต้อนรับสู่ระบบแจ้งเตือนระดับน้ำเกลือ</h1>
+    <p class="intro" data-i18n="homeDescription">ระบบนี้ออกแบบมาเพื่อช่วยแพทย์และพยาบาลมอนิเตอร์ระดับน้ำเกลือและอัตราการไหลของสารน้ำแบบเรียลไทม์ ลดภาระงานและเพิ่มความปลอดภัยแก่ผู้ป่วย</p>
+    <div class="home-links">
+      <a href="dashboard.html" class="home-link" data-i18n="homeGoDashboard">ไปที่แดชบอร์ด</a>
+      <a href="devices.html" class="home-link" data-i18n="homeManageDevices">จัดการอุปกรณ์</a>
+      <a href="reports.html" class="home-link" data-i18n="homeViewReports">ดูรายงาน</a>
+      <a href="staff.html" class="home-link" data-i18n="homeManageStaff">จัดการเจ้าหน้าที่</a>
+      <a href="patients.html" class="home-link" data-i18n="managePatients">ลงทะเบียนผู้ป่วย</a>
+    </div>
+  </main>
+  <script src="auth.js"></script>
+  <script src="lang.js"></script>
+  <script>
+    // Redirect to login if not doctor
+    (function() {
+      const role = localStorage.getItem('role');
+      if (!role) {
+        window.location.href = 'login.html';
+        return;
+      }
+      if (role === 'user') {
+        window.location.href = 'user.html';
+        return;
+      }
+    })();
+    // Apply translations
+    applyStaticTranslations();
+    // Handle language select
+    document.getElementById('languageSelect').addEventListener('change', function() {
+      const lang = this.value;
+      localStorage.setItem('language', lang);
+      setLanguage(lang);
+      applyStaticTranslations();
+    });
+    // Dark mode toggle
+    document.getElementById('darkModeToggle').addEventListener('click', toggleDarkMode);
+    // Logout button clears role and redirects to login
+    document.getElementById('logoutButton').addEventListener('click', function() {
+      localStorage.removeItem('role');
+      window.location.href = 'login.html';
+    });
+  </script>
+</body>
+</html>

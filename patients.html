@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="managePatients">ลงทะเบียนผู้ป่วย - ระบบแจ้งเตือนระดับน้ำเกลือ</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Role-based access control must be loaded before page rendering -->
+  <script src="auth.js"></script>
+</head>
+<body>
+  <!-- Navigation bar with language/theme controls -->
+  <nav class="navbar">
+    <div class="nav-links">
+      <a href="index.html" class="nav-link" data-i18n="navHome">หน้าแรก</a>
+      <a href="dashboard.html" class="nav-link" data-i18n="navDashboard">แดชบอร์ด</a>
+      <a href="devices.html" class="nav-link" data-i18n="navDevices">อุปกรณ์</a>
+      <a href="reports.html" class="nav-link" data-i18n="navReports">รายงาน</a>
+      <a href="staff.html" class="nav-link" data-i18n="navStaff">เจ้าหน้าที่</a>
+      <a href="patients.html" class="nav-link active" data-i18n="navPatients">ผู้ป่วย</a>
+      <a href="contact.html" class="nav-link" data-i18n="navContact">ติดต่อเรา</a>
+    </div>
+    <div class="nav-actions">
+      <select id="languageSelect" class="lang-select">
+        <option value="th" data-i18n="navLangTh">ไทย</option>
+        <option value="en" data-i18n="navLangEn">English</option>
+        <option value="la" data-i18n="navLangLa">ລາວ</option>
+      </select>
+      <button id="darkModeToggle" class="dark-toggle" data-i18n="darkMode">โหมดมืด</button>
+    </div>
+  </nav>
+  <main>
+    <h1 data-i18n="managePatients">ลงทะเบียนผู้ป่วย</h1>
+    <form id="patientForm" class="patient-form">
+      <div class="form-row">
+        <label for="patientId" data-i18n="patientID">รหัสผู้ป่วย:</label>
+        <input type="text" id="patientId" name="patientId" required>
+      </div>
+      <div class="form-row">
+        <label for="patientName" data-i18n="patientName">ชื่อผู้ป่วย:</label>
+        <input type="text" id="patientName" name="patientName" required>
+      </div>
+      <div class="form-row">
+        <label for="patientAge" data-i18n="patientAge">อายุ:</label>
+        <input type="number" id="patientAge" name="patientAge" min="0" required>
+      </div>
+      <div class="form-row">
+        <label for="patientGender" data-i18n="patientGender">เพศ:</label>
+        <select id="patientGender" name="patientGender" required>
+          <option value="male" data-i18n="patientGenderMale">ชาย</option>
+          <option value="female" data-i18n="patientGenderFemale">หญิง</option>
+          <option value="other" data-i18n="patientGenderOther">อื่น</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label for="patientFloorSelect" data-i18n="patientFloor">ชั้น:</label>
+        <!-- Use a select element for floor selection. Options will be populated dynamically in patients.js -->
+        <select id="patientFloorSelect" name="patientFloor" required></select>
+      </div>
+      <div class="form-row">
+        <label for="patientBedSelect" data-i18n="patientBed">เตียง:</label>
+        <!-- Use a select element for bed selection. Options will be populated dynamically in patients.js -->
+        <select id="patientBedSelect" name="patientBed" required></select>
+      </div>
+      <div class="form-row">
+        <label for="patientDiagnosis" data-i18n="patientDiagnosis">การวินิจฉัย:</label>
+        <input type="text" id="patientDiagnosis" name="patientDiagnosis">
+      </div>
+      <div class="form-row">
+        <label for="patientMedication" data-i18n="patientMedication">ยา/การรักษา:</label>
+        <input type="text" id="patientMedication" name="patientMedication">
+      </div>
+      <div class="form-row">
+        <label for="patientAllergies" data-i18n="patientAllergies">ประวัติแพ้ยา:</label>
+        <input type="text" id="patientAllergies" name="patientAllergies">
+      </div>
+      <!-- Hospital measured values: height, weight and blood pressure -->
+      <div class="form-row">
+        <label for="patientHeight" data-i18n="patientHeight">ความสูง (ซม.):</label>
+        <input type="number" id="patientHeight" name="patientHeight" min="0">
+      </div>
+      <div class="form-row">
+        <label for="patientWeight" data-i18n="patientWeight">น้ำหนัก (กก.):</label>
+        <input type="number" id="patientWeight" name="patientWeight" min="0">
+      </div>
+      <div class="form-row">
+        <label for="patientBloodPressure" data-i18n="patientBloodPressure">ความดันเลือด (mmHg):</label>
+        <input type="text" id="patientBloodPressure" name="patientBloodPressure">
+      </div>
+      <div class="form-row">
+        <label for="patientNotes" data-i18n="patientNotes">หมายเหตุ:</label>
+        <textarea id="patientNotes" name="patientNotes" rows="3"></textarea>
+      </div>
+      <div class="form-row">
+        <button type="submit" class="primary-button" data-i18n="savePatient">บันทึกผู้ป่วย</button>
+      </div>
+    </form>
+    <div id="patientMessage" class="form-message"></div>
+  </main>
+  <script src="lang.js"></script>
+  <script src="patients.js"></script>
+</body>
+</html>

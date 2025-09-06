@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>จัดการเจ้าหน้าที่ - ระบบแจ้งเตือนระดับน้ำเกลือ</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Role-based access control must be loaded before page rendering -->
+  <script src="auth.js"></script>
+</head>
+<body>
+  <!-- Navigation bar with language/theme controls -->
+  <nav class="navbar">
+    <div class="nav-links">
+      <a href="index.html" class="nav-link" data-i18n="navHome">หน้าแรก</a>
+      <a href="dashboard.html" class="nav-link" data-i18n="navDashboard">แดชบอร์ด</a>
+      <a href="devices.html" class="nav-link" data-i18n="navDevices">อุปกรณ์</a>
+      <a href="reports.html" class="nav-link" data-i18n="navReports">รายงาน</a>
+      <a href="staff.html" class="nav-link active" data-i18n="navStaff">เจ้าหน้าที่</a>
+      <a href="patients.html" class="nav-link" data-i18n="navPatients">ผู้ป่วย</a>
+      <a href="contact.html" class="nav-link" data-i18n="navContact">ติดต่อเรา</a>
+    </div>
+    <div class="nav-actions">
+      <select id="languageSelect" class="lang-select">
+        <option value="th" data-i18n="navLangTh">ไทย</option>
+        <option value="en" data-i18n="navLangEn">English</option>
+        <option value="la" data-i18n="navLangLa">ລາວ</option>
+      </select>
+      <button id="darkModeToggle" class="dark-toggle" data-i18n="darkMode">โหมดมืด</button>
+    </div>
+  </nav>
+  <main>
+    <h1 style="margin-bottom:16px;" data-i18n="manageStaff">กำหนดและจัดการเจ้าหน้าที่</h1>
+    <!-- Form for adding new staff -->
+    <form id="staffForm" class="staff-form">
+      <div class="form-row">
+        <label for="staffName" data-i18n="staffName">ชื่อเจ้าหน้าที่:</label>
+        <input type="text" id="staffName" required placeholder="" data-i18n="staffName">
+      </div>
+      <div class="form-row">
+        <label for="staffContact" data-i18n="staffContact">ติดต่อ:</label>
+        <input type="text" id="staffContact" required placeholder="" data-i18n="staffContact">
+      </div>
+      <div class="form-row">
+        <label for="staffFloor" data-i18n="staffFloor">ชั้นที่ดูแล:</label>
+        <select id="staffFloor"></select>
+      </div>
+      <button type="submit" class="primary-button" data-i18n="addStaff">เพิ่มเจ้าหน้าที่</button>
+    </form>
+    <!-- Container for listing existing staff -->
+    <div id="staffListContainer" style="margin-top:24px;">
+      <h2 style="margin-bottom:12px;" data-i18n="registeredStaff">รายชื่อเจ้าหน้าที่ที่ลงทะเบียน</h2>
+      <table id="staffTable" class="staff-table">
+        <thead>
+          <tr>
+            <th data-i18n="columnName">ชื่อ</th>
+            <th data-i18n="columnContact">ติดต่อ</th>
+            <th data-i18n="columnFloor">ชั้น</th>
+            <th data-i18n="columnActions">การจัดการ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Entries will be injected here by staff.js -->
+        </tbody>
+      </table>
+      <!-- Message when no staff registered -->
+      <p id="noStaffMessage" style="display:none; color:#555;" data-i18n="noStaffRegistered">ยังไม่มีเจ้าหน้าที่ถูกลงทะเบียน</p>
+    </div>
+  </main>
+  <!-- Include language/theme management before page script -->
+  <script src="lang.js"></script>
+  <script src="staff.js"></script>
+</body>
+</html>

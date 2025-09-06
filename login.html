@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>เข้าสู่ระบบ - ระบบแจ้งเตือนระดับน้ำเกลือ</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Simple navigation bar with language and dark mode controls for login page -->
+  <nav class="navbar">
+    <div class="nav-actions">
+      <select id="languageSelect" class="lang-select">
+        <option value="th" data-i18n="navLangTh">ไทย</option>
+        <option value="en" data-i18n="navLangEn">English</option>
+        <option value="la" data-i18n="navLangLa">ລາວ</option>
+      </select>
+      <button id="darkModeToggle" class="dark-toggle" data-i18n="darkMode">โหมดมืด</button>
+    </div>
+  </nav>
+  <main class="login-container">
+    <h1 data-i18n="selectRole">เลือกบทบาทผู้ใช้</h1>
+    <div class="role-options">
+      <div class="role-option" id="doctorOption">
+        <h3 data-i18n="doctorRole">แพทย์/พยาบาล</h3>
+        <p data-i18n="doctorDescription">สำหรับเจ้าหน้าที่โรงพยาบาลเพื่อดูแลผู้ป่วยและอุปกรณ์ทั้งหมด</p>
+        <button class="role-button" id="doctorButton" data-i18n="continueAs">เข้าสู่ระบบ</button>
+      </div>
+      <div class="role-option" id="userOption">
+        <h3 data-i18n="userRole">ผู้ใช้ทั่วไป</h3>
+        <p data-i18n="userDescription">สำหรับผู้ใช้ทั่วไปที่ซื้ออุปกรณ์ไปใช้งานที่บ้าน</p>
+        <button class="role-button" id="userButton" data-i18n="continueAs">เข้าสู่ระบบ</button>
+      </div>
+    </div>
+  </main>
+  <script src="lang.js"></script>
+  <script>
+    // Apply translations on page load
+    applyStaticTranslations();
+    // Handle dark mode toggle
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    darkModeToggle.addEventListener('click', toggleDarkMode);
+    // Handle role selection
+    document.getElementById('doctorButton').addEventListener('click', function() {
+      localStorage.setItem('role', 'doctor');
+      window.location.href = 'index.html';
+    });
+    document.getElementById('userButton').addEventListener('click', function() {
+      localStorage.setItem('role', 'user');
+      window.location.href = 'user.html';
+    });
+    // Handle language selection
+    document.getElementById('languageSelect').addEventListener('change', function() {
+      const lang = this.value;
+      localStorage.setItem('language', lang);
+      setLanguage(lang);
+      applyStaticTranslations();
+    });
+  </script>
+</body>
+</html>
